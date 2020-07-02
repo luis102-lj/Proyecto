@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoBlackJack21", "ProyectoBlackJack21\ProyectoBlackJack21.csproj", "{6DC17CFE-7439-49F2-8086-E355B88C6970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto21.Models", "Proyecto21.Models\Proyecto21.Models.csproj", "{1192AC00-4993-4D72-B60E-2205C5E7113F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto21.Naipe", "Proyecto21.Naipe\Proyecto21.Naipe.csproj", "{BFB83EA3-C600-4A02-A071-2CC77094E310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto21.Jugabilidad", "Proyecto21.Jugabilidad\Proyecto21.Jugabilidad.csproj", "{87A47BF3-4D8D-4062-A47E-00F69D8DA308}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{6DC17CFE-7439-49F2-8086-E355B88C6970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DC17CFE-7439-49F2-8086-E355B88C6970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DC17CFE-7439-49F2-8086-E355B88C6970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1192AC00-4993-4D72-B60E-2205C5E7113F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1192AC00-4993-4D72-B60E-2205C5E7113F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1192AC00-4993-4D72-B60E-2205C5E7113F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1192AC00-4993-4D72-B60E-2205C5E7113F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB83EA3-C600-4A02-A071-2CC77094E310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFB83EA3-C600-4A02-A071-2CC77094E310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFB83EA3-C600-4A02-A071-2CC77094E310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFB83EA3-C600-4A02-A071-2CC77094E310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A47BF3-4D8D-4062-A47E-00F69D8DA308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A47BF3-4D8D-4062-A47E-00F69D8DA308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A47BF3-4D8D-4062-A47E-00F69D8DA308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A47BF3-4D8D-4062-A47E-00F69D8DA308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
