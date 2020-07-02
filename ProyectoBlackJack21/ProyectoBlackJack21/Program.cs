@@ -8,7 +8,6 @@ namespace ProyectoBlackJack21
         {
             Jugabilidad nuevoJuego = new Jugabilidad();
             nuevoJuego.Menu21();
-            Console.WriteLine();
         }
     }
 }
