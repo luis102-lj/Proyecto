@@ -7,11 +7,23 @@ namespace Proyecto21.Models
     public class Jugador
     {
 
-        private string nombreJugador { get; set; }
-        private Boolean recibeCarta { get; set; }
-        private Boolean jugadorRetirado { get; set; }
-        private Carta[] _cartasJugador = new Carta[52];
-        private int contadorDeCartasDePersona { get; set; }
+        public string nombreJugador { get; set; }
+        public Boolean recibeCarta { get; set; }
+        public Boolean jugadorRetirado { get; set; }
+        public Carta[] _cartasJugador;
+        public int contadorDeCartasDePersona { get; set; }
+
+
+        public Jugador(string nombre)
+        {
+            nombreJugador = nombre;
+            _cartasJugador = new Carta[10];
+            jugadorRetirado = false;
+            recibeCarta = true;
+            contadorDeCartasDePersona = 0;
+            
+
+        }
 
         public Boolean Stay()
         {

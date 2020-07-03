@@ -1,11 +1,16 @@
 ﻿using System;
 using Proyecto21.Naipe;
 using Proyecto21.Models;
+using System.Security.Cryptography.X509Certificates;
+using System.Runtime.InteropServices.ComTypes;
+
 namespace Proyecto21.Jugabilidad
 {
     public class Jugabilidad
     {
         private int cantidadDeJugadores { get; set; }
+        private Jugador[] mesa=new Jugador [6];
+        private Models.Naipe naipeDeLaMesa;
         
         public void Menu21()
         {
@@ -30,7 +35,7 @@ namespace Proyecto21.Jugabilidad
                         }
                         else
                         {
-                            jugar21(cantidadDeJugadores);
+                            repartirCartas();
                         }
 
                         break;
@@ -59,7 +64,7 @@ namespace Proyecto21.Jugabilidad
             if (numeroDeInformacion == 1)
                 Console.WriteLine("Bienvenidos a BLACKJACK21 \n1) Jugar. \n2) Salir.");
             else if (numeroDeInformacion == 2)
-                Console.WriteLine("Ingrese la cantidad de jugadores(Maximo 5 jugadores).\nSi ingresa 0 saldra del sistema.");
+                Console.WriteLine("Ingrese la cantidad de jugadores(Minino 2, maximo 5 jugadores).\nSi ingresa 0 saldra del sistema.");
             else if (numeroDeInformacion == 3)
                 Console.WriteLine("Gracias por utilizar BLACKJACK21");
         }
@@ -94,6 +99,51 @@ namespace Proyecto21.Jugabilidad
                 Console.WriteLine("Ingrese una opcion valida de jugadores, no se permiten ningun valor que no sea numerico.");
                 return -1;
             }
+        }
+
+
+        //Desarollo del metodo repartir
+
+        public void crearMesa(int jugadores) {
+            for (int i = 1; i <= jugadores; i++)
+            {
+                Console.WriteLine("Ingrese el nombre del jugador {0}:", i);
+                string nombre = Console.ReadLine();
+                mesa[i] = new Jugador(nombre); 
+                
+            }
+           }
+
+        public void repartirCartas()
+        {
+            naipeDeLaMesa = new Models.Naipe();
+            crearMesa(cantidadDeJugadores);
+
+            for(int i=0; i<=cantidadDeJugadores -1 ; i++)
+            {
+                for(int j=0; j<=1; j++)
+                {
+                    Console.WriteLine("Hola {0},{1}", i, j);
+                }
+            }
+
+           /* while (recorridoDeReparticion <= cantidadDeJugadores)
+            {
+                int darCarta = 1;
+                while (darCarta <= 2)
+                {
+                    mesa[recorridoDeReparticion]._cartasJugador[darCarta] =
+                                           naipeDeLaMesa.elMaso[naipeDeLaMesa.getContador()];
+                    naipeDeLaMesa.setContador(naipeDeLaMesa.getContador() + 1);
+                    Console.WriteLine("Se repartio la carta {0}{1} a la persona{2}",
+                        mesa[recorridoDeReparticion]._cartasJugador[darCarta].Valor,
+                        mesa[recorridoDeReparticion]._cartasJugador[darCarta].ElPalo,
+                        mesa[recorridoDeReparticion].nombreJugador);
+                    naipeDeLaMesa.setContador(naipeDeLaMesa.getContador() + 1);
+                    darCarta++;
+                }
+                   
+            }*/
         }
     }
 }
