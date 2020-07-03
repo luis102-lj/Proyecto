@@ -49,5 +49,10 @@ namespace Proyecto21.Models
             return _contador;
         }
 
+        public void setContador(int valor)
+        {
+            _contador = valor;
+        }
+
     }
 }
