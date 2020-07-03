@@ -6,6 +6,7 @@ namespace Proyecto21.Jugabilidad
     public class Jugabilidad
     {
         private int cantidadDeJugadores { get; set; }
+        
         public void Menu21()
         {
             string opcionSeleccionada = "";
