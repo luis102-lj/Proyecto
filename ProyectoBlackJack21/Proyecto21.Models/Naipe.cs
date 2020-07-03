@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Proyecto21.Models
 {
     public class Naipe
@@ -47,6 +48,11 @@ namespace Proyecto21.Models
         public int getContador()
         {
             return _contador;
+        }
+
+        public void setContador(int valor)
+        {
+            _contador = valor;
         }
 
     }

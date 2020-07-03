@@ -1,5 +1,6 @@
 ﻿using System;
 using Proyecto21.Jugabilidad;
+using Proyecto21.Models;
 namespace ProyectoBlackJack21
 {
     class Program
@@ -8,6 +9,7 @@ namespace ProyectoBlackJack21
         {
             Jugabilidad nuevoJuego = new Jugabilidad();
             nuevoJuego.Menu21();
+
         }
     }
 }
