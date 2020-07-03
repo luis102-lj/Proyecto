@@ -68,15 +68,7 @@ namespace Proyecto21.Models
             _cartasJugador[contadorDeCartasDePersona] = naipe.elMaso[naipe.getContador()]; 
             contadorDeCartasDePersona++;
             naipe.setContador(naipe.getContador() + 1);
-            
-
-           //Boolean solicitudDeCarta=Stay();
-            /*if (solicitudDeCarta)
-            {
-            }
-            else{
-                Console.WriteLine("Espera que los otros jugadores terminen sus movimientos");
-            }*/
+          
         }
 
 
