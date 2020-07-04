@@ -15,10 +15,10 @@ namespace Proyecto21.Jugabilidad
         public void Menu21()
         {
             string opcionSeleccionada = "";
-            opcionesDeInformacion(1);
+            
             while (opcionSeleccionada != "2")
             {
-
+                opcionesDeInformacion(1);
                 opcionSeleccionada = Console.ReadLine();
                 switch (opcionSeleccionada)
                 {
@@ -39,31 +39,42 @@ namespace Proyecto21.Jugabilidad
 
         public void Jugar21(String opcionSeleccionada)
         {
+            string continuarJugando = "1";
             cantidadDeJugadores = validacionDeJugadores();
-            while (cantidadDeJugadores == -1)
+            while (continuarJugando == "1")
             {
-                cantidadDeJugadores = validacionDeJugadores();
-            }
-            if (cantidadDeJugadores == 0)
-            {
-                opcionesDeInformacion(3);
-                opcionSeleccionada = "2";
-            }else{
-                string continuarJugando = "1";
-                crearMesa(cantidadDeJugadores);
-                repartirCartas();
-                while (continuarJugando=="1")
+                while (cantidadDeJugadores == -1)
                 {
+                    cantidadDeJugadores = validacionDeJugadores();
+                }
+                if (cantidadDeJugadores == 0)
+                {
+                    opcionesDeInformacion(3);
+                    opcionSeleccionada = "2";
+                }
+                else
+                {
+                    crearMesa(cantidadDeJugadores);
+                    repartirCartas();
                     imprimirMesa();
+                    Console.WriteLine("Revisen sus cartas bien y evaluen si quiere mas cartas o quedarse");
+                    dealer(mesa);
+                    string ganador;
+                    ganador = EvaluarGanador(mesa);
+                    if(ganador == "") { ganador = "Nadie, porque ambos se pasaron de 21!"; }
+                    Console.WriteLine("El ganador es: " + ganador);
+
+
                     Console.WriteLine("Mano terminada, quieres seguir Jugando?\nDigite 1 si quiere seguir jugando y 2 si quiere salir del juego");
-                    continuarJugando= Console.ReadLine();
-                    if (continuarJugando=="1")
+                    continuarJugando = Console.ReadLine();
+                    if (continuarJugando == "1")
                     {
                         reiniciarJuego();
-                        
+
                     }
+
+
                 }
-                
             }
         }
 
@@ -162,48 +173,48 @@ namespace Proyecto21.Jugabilidad
 
         //Actualizacion LUISQUESADA
 
-        //Sirve para confirmar el valor que se le quiere dar al As ya sea uno u once
-        //Parametros: "carta" es la carta a la cual se le va hacer la consulta si es un As o cualquier otra carta
-        public void RecibioAs(Carta carta)
-        {
-            Boolean confirmacion=false;
-            Console.WriteLine("Usted acaba de recibir un As, desea valuar el as como 11 o 1, digite 11 si desea ese valor o 1 en caso que desee 1: ");
-            if (carta.Numero == "A")
-            {
-                while (confirmacion!=true)
-                {
-                    string valor = Console.ReadLine();
-                    if (valor == "11")   {
-                        carta.Valor = 11;
-                        confirmacion = true;
-                    }
-                    else if (valor == "1"){
-                        carta.Valor = 1;
-                        confirmacion = true;
-                    }
-                    else{
-                        Console.WriteLine("Ingrese una opcion valida");
-                    }
-                }
-            }
-        }
+        
 
         /*Evalua cual de los jugadores de la mesa es el ganador*/
         public String EvaluarGanador(Jugador[] jugadores)
         {
             Jugador ganador = new Jugador();
             int mayor = 0;
-            for (int i = 0; i <= jugadores.Length; ++i)
+            for (int i = 0; i <= jugadores.Length-1; ++i)
             {
-                int totalMano = jugadores[i].DevolverTotalMano();
-                if (mayor < totalMano)
+                if(jugadores[i]!= null) 
                 {
-                    mayor = totalMano;
-                    ganador = jugadores[i];
+                    int totalMano = jugadores[i].DevolverTotalMano();
+                    if (mayor < totalMano && totalMano <= 21)
+                    {
+                        mayor = totalMano;
+                        ganador = jugadores[i];
+                    }
                 }
+                
             }
             return ganador.getNombre();
         }
-
+        /// <summary>
+        /// El juego determina por medio de un dealer que ofrezca más cartas al jugador en caso de necesitarlas, o quedarse y continuar preguntando al siguiente jugador
+        /// </summary>
+        /// <param name="jugadores"></param>
+        public void dealer(Jugador[] jugadores)
+        {
+            for (int i = 0; i <= jugadores.Length-1; ++i) 
+            {
+                if(jugadores[i] != null)
+                {
+                    jugadores[i].Stay();
+                    while (jugadores[i].recibeCarta)
+                    {
+                        Console.WriteLine(jugadores[i].nombreJugador + " sus cartas ahora son:");
+                        jugadores[i].pedirCarta(naipeDeLaMesa);
+                        jugadores[i].imprimirMano();
+                        jugadores[i].Stay();
+                    }
+                } 
+            }
+        }
     }
 }
