@@ -4,16 +4,17 @@ namespace Proyecto21.Naipe
 {
     public class Acciones
     {
+        //-----------------------Metodos------------------------------//
+
         /*El metodo consiste en devovler la primera carta del maso*/
         public Carta DemeCartaDeEncima(Models.Naipe naipe)
         {
             Console.WriteLine(string.Format("La carta es {0} de {1}", naipe.elMaso[naipe.getContador()].Numero, naipe.elMaso[naipe.getContador()].ElPalo.ToString()));
             return naipe.elMaso[naipe.getContador()];
         }
+        //-----------------------Fin DemeCartaDeEncime()------------------------------//
 
-        /*El metodo consiste en pedir un nuevo maso en caso de que se haya acabado el existente o necesite uno para
-         * comenzar
-         */
+        /*El metodo consiste en pedir un nuevo maso en caso de que se haya acabado el existente o necesite uno para comenzar*/
         public Models.Naipe DemeNuevoMaso()
         {
             //Modelo.Naipe elNaipe = new Modelo.Naipe();
@@ -21,6 +22,7 @@ namespace Proyecto21.Naipe
             Barajar(elNaipe);
             return elNaipe;
         }
+        //-----------------------Fin DemeNuevoMaso------------------------------//
 
         /*Metodo barajar consite en crear dos variables random para poder intercambiar los valores aleatoriamente.
         1)Se crea una variable revolver que va a ser la cantidad de veces que se va a realizar los intercambios 
@@ -35,8 +37,7 @@ namespace Proyecto21.Naipe
         {
             Random numeroBuscador = new Random();
             int revolver = 0;
-            while (revolver != 52)
-            {
+            while (revolver != 52){
                 int numeroIntercambiar1 = numeroBuscador.Next(52);
                 int numeroIntercambiar2 = numeroBuscador.Next(52);
 
@@ -46,22 +47,8 @@ namespace Proyecto21.Naipe
                 revolver++;
             }
         }
+        //-----------------------Fin Barajar()------------------------------//
 
-        /*Metodo imprimir consiste en tomar un naipe e imprimir cada posicion del mismo
-       1)Se crear una variable recorrido para compararla con a cantidad de cartas del naipe
-       2)Se imprime en consola el valor del recorrido en ese momento
-       3)Se aumenta el recorrio*/
-        public void Imprimir(Models.Naipe naipe)
-        {
-            int recorrido = 0;
-            while (naipe.elMaso.Length != recorrido)
-            {
-
-                Console.WriteLine(string.Format("La carta es {0} de {1}", naipe.elMaso[recorrido].Numero, naipe.elMaso[recorrido].ElPalo.ToString()));
-                recorrido++;
-            }
-
-        }
-
+        //-----------------------Fin Metodos------------------------------//
     }
 }

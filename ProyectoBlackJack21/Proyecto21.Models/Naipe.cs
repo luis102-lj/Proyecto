@@ -8,7 +8,7 @@ namespace Proyecto21.Models
     public class Naipe
     {
 
-        //Variables--------------------------------------------------------------------
+        //-----------------------------Variables---------------------------------------
         private int _contador = 0;
         private Carta[] _elMaso = new Carta[52];
         public Carta[] elMaso
@@ -16,10 +16,11 @@ namespace Proyecto21.Models
             get { return _elMaso; }
             set { }
         }
+        //-----------------------------Fin Variables---------------------------------------
 
 
 
-        //Constructores-----------------------------------------------------------------
+        //-----------------------------Constructores------------------------------------
         public Naipe()
         {
             Carta[] elResultado = new Carta[52];
@@ -30,21 +31,26 @@ namespace Proyecto21.Models
             CrearCartasDelPalo(ref contador, ref elResultado, Palo.Treboles);
             elResultado.CopyTo(elMaso, 0);
         }
+        //-----------------------------Fin Constructores----------------------------------
 
 
-        //Metodos-------------------------------------------------------------------------
+        //------------------------------Metodos-------------------------------------------
         private void CrearCartasDelPalo(ref int contador, ref Carta[] elResultado, Palo elPalo)
         {
             elResultado[contador++] = new Carta("A", elPalo);
-            for (int i = 2; i <= 10; i++)
-            {
+            for (int i = 2; i <= 10; i++){
                 elResultado[contador++] = new Carta(i, elPalo);
             }
             elResultado[contador++] = new Carta("J", elPalo);
             elResultado[contador++] = new Carta("Q", elPalo);
             elResultado[contador++] = new Carta("K", elPalo);
         }
+        //------------------------------Fin Metodos-------------------------------------------
 
+
+
+
+        //------------------------------Get Set-------------------------------------------
         public int getContador()
         {
             return _contador;
@@ -54,6 +60,6 @@ namespace Proyecto21.Models
         {
             _contador = valor;
         }
-
+        //------------------------------Fin Get Set-------------------------------------------
     }
 }

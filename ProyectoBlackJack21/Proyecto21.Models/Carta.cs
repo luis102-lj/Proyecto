@@ -7,20 +7,20 @@ namespace Proyecto21.Models
     public class Carta
     {
 
-        //Variables--------------------------------------------------------------------
+        //-----------------------------Variables---------------------------------------
         public string Numero { get; set; }
         public Palo ElPalo { get; set; }
         public int Valor { get; set; }
+        //-----------------------------Fin Variables---------------------------------------
 
 
-
-        //Constructores-----------------------------------------------------------------
+        //-----------------------------Constructores------------------------------------
         public Carta(int elNumero, Palo elPalo)
         {
             ElPalo = elPalo;
             Valor = elNumero;
             if (2 <= elNumero && elNumero <= 10)
-                Numero = elNumero.ToString();
+            Numero = elNumero.ToString();
         }
 
         public Carta(string elNumero, Palo elPalo)
@@ -34,8 +34,7 @@ namespace Proyecto21.Models
             if (elNumero == "A")
                 this.Valor = 11;
         }
-
-        //Metodos-------------------------------------------------------------------------
+        //-----------------------------Fin Constructores------------------------------------
 
     }
 }
