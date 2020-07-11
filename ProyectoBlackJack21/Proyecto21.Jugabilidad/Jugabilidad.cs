@@ -1,8 +1,6 @@
 ﻿using System;
 using Proyecto21.Naipe;
 using Proyecto21.Models;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace Proyecto21.Jugabilidad
 {
@@ -58,7 +56,7 @@ namespace Proyecto21.Jugabilidad
                 if (cantidadDeJugadores == 0)
                 {
                     opcionesDeInformacion(3);
-                    opcionSeleccionada = "2";
+                    break;
                 }
                 else
                 {
@@ -238,7 +236,8 @@ namespace Proyecto21.Jugabilidad
             {
                 if(jugadores[i] != null){
                     jugadores[i].imprimirMano();
-                    while(jugadores[i].recibeCarta){
+                    ValidacionDeCheater();
+                    while (jugadores[i].recibeCarta){
                         jugadores[i].RecibioAs(jugadores[i]);
                         ValidacionDeRangoDeJuego(jugadores[i]);
                     }
@@ -247,6 +246,44 @@ namespace Proyecto21.Jugabilidad
         }
         //-----------------------Fin Dealer()------------------------------//
 
+        public void verLaSiguieteCarta()
+        {
+            Console.WriteLine("La siguiente carta es: {0} {1}", naipeDeLaMesa.elMaso[naipeDeLaMesa.getContador()].Numero,
+               naipeDeLaMesa.elMaso[naipeDeLaMesa.getContador()].ElPalo);
+        }
+        public void verLaSiguientesCartasPorCantidad()
+        {
+            int numeroDeCartas=-1;
+            while (numeroDeCartas == -1){
+                try {
+                    Console.WriteLine("Ingrese la cantidad de cartas a consultar(Maximo 5)");
+                    numeroDeCartas = Int32.Parse(Console.ReadLine());
+                    if (verificacionDeCantidadDeCartas(numeroDeCartas) == true){
+                        Console.Clear();
+                        Console.WriteLine("Estas son las siguientes {0} cartas:", numeroDeCartas);
+                        for (int i = naipeDeLaMesa.getContador(); i <= numeroDeCartas + naipeDeLaMesa.getContador() - 1; i++){
+                            Console.WriteLine("Carta {0} {1}", naipeDeLaMesa.elMaso[i].Numero,
+                                 naipeDeLaMesa.elMaso[i].ElPalo);
+                        }
+                    }else{
+                        numeroDeCartas = -1;
+                    }
+                }catch (FormatException){
+                    Console.WriteLine("Ingrese una opcion valida");
+                    numeroDeCartas = -1;
+                }
+            }
+        }
+
+        public Boolean verificacionDeCantidadDeCartas(int result)
+        {
+            if (result < 6){
+                return true;
+            }else{
+                Console.WriteLine("Ingrese menor o igual a 5");
+                return false;
+            }
+        }
         public void ValidacionDeRangoDeJuego(Jugador jugador)
         {
             if (jugador.DevolverTotalMano() >= 15){
@@ -254,19 +291,73 @@ namespace Proyecto21.Jugabilidad
                 if (jugador.recibeCarta){
                     jugador.pedirCarta(naipeDeLaMesa);
                     jugador.imprimirMano();
-                    
                 }
-            }else{
+            }
+            else{
                 Console.WriteLine("Se le agrego otra carta mas, ya que contaba con una puntuacion menor a 15 puntos.");
                 jugador.pedirCarta(naipeDeLaMesa);
                 jugador.imprimirMano();
             }
         }
 
+        
+
+        public void ValidacionDeCheater()
+        {
+            Console.WriteLine("Quieres hacer trampa?\n1)Ingrese 1 si quiere hacer trampa.\n2)Ingrese 2 si quiere seguir jugando");
+            string hacerTrampa= "";
+            while (hacerTrampa != "2")
+            {
+                hacerTrampa = Console.ReadLine();
+                if (hacerTrampa == "1"){
+                    ValidacionDeCualTrampa();
+                    break;
+                }else if(hacerTrampa=="2"){
+                    break;
+                }else{
+                    Console.WriteLine("Ingrese un valor correcto");
+                }
+            }
+            
+        }   
+        
+
+        public void ValidacionDeCualTrampa()
+        {
+            Console.WriteLine("Que tipo de trampa quieres hacer." +
+                "\n1)Ingresa uno si solo quieres ver la carta siguiente" +
+                "\n2)Ingresa 2 si quieres ver varias cartas." +
+                "\nx)Ingresa x si no quieres hacer trampa");
+            string cualTrampa = "";
+            while (cualTrampa != "x"){
+                cualTrampa = Console.ReadLine();
+                if (cualTrampa == "1"){
+                    verLaSiguieteCarta();
+                    break;
+                }else if (cualTrampa=="2"){
+                    verLaSiguientesCartasPorCantidad();
+                    break;
+                }else if (cualTrampa == "x"){
+                    break;
+                }else{
+                    Console.WriteLine("Ingrese un valor correcto");
+                }
+            }
+
+        }
+    
+
+        public void imprimirMaso()
+        {
+            for(int i=0; i <= naipeDeLaMesa.elMaso.Length-1; i++)
+            {
+                Console.WriteLine("Carta {0} {1}", naipeDeLaMesa.elMaso[i].Numero,
+                     naipeDeLaMesa.elMaso[i].ElPalo);
+            }
+            Console.WriteLine(naipeDeLaMesa.elMaso.Length);
+        }
+
         //-----------------------Fin Metodos------------------------------//
-
-
-
 
     }
 }
