@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Proyecto21.Models
 {
@@ -101,7 +99,7 @@ namespace Proyecto21.Models
         {
             Console.WriteLine("{0} sus cartas son:",nombreJugador);
              for (int i = 0; i <contadorDeCartasDePersona; i++){
-                Console.WriteLine("{0}{1}", 
+                Console.WriteLine("{0} {1}", 
                     _cartasJugador[i].Numero,
                     _cartasJugador[i].ElPalo);   
              }
