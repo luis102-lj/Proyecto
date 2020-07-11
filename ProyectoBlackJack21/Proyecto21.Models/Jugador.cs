@@ -75,7 +75,7 @@ namespace Proyecto21.Models
         //"CantidadDeCartas"se pide la cantidad de cartas que requiere el jugador
         public void pedirCarta(Naipe naipe)
         {
-             _cartasJugador[contadorDeCartasDePersona] = naipe.elMaso[naipe.getContador()]; 
+             _cartasJugador[contadorDeCartasDePersona] = naipe.elMaso[naipe.getContador()];
             contadorDeCartasDePersona++;
             naipe.setContador(naipe.getContador() + 1);
         }
@@ -88,9 +88,6 @@ namespace Proyecto21.Models
             if (this._cartasJugador[0].Valor != 0){
                 for (int i = 0; i < this._cartasJugador.Length; ++i){
                     if (this._cartasJugador[i] != null){
-                        if (this._cartasJugador[i].Numero == "A"){
-                            RecibioAs(this._cartasJugador[i]);
-                        }
                         resultado += this._cartasJugador[i].Valor;
                     }
                 }
@@ -113,21 +110,27 @@ namespace Proyecto21.Models
 
         //Sirve para confirmar el valor que se le quiere dar al As ya sea uno u once, es usada en DevolverTotalMano para evaluar si la carta en mano es un A
         //Parametros: "carta" es la carta a la cual se le va hacer la consulta si es un As o cualquier otra carta
-        public void RecibioAs(Carta carta)
+        public void RecibioAs(Jugador jugador)
         {
-            Boolean confirmacion = false;
-            Console.Clear();
-            this.imprimirMano();
-            Console.WriteLine(this.nombreJugador +" posee un As, desea valuar el As como 11 o 1, digite 11 si desea ese valor o 1 en caso que desee 1: ");
-            ConfirmacionRecibioAs(confirmacion,carta);    
+            for(int i=0; i <= contadorDeCartasDePersona - 1; i++)
+            {
+                if (jugador._cartasJugador[i].Numero == "A")
+                {
+                    Console.WriteLine(this.nombreJugador + 
+                    " posee un As de {0}, desea valuar el As como 11 o 1, digite 11 si desea ese valor o 1 en caso que desee 1: ", jugador._cartasJugador[i].ElPalo);
+                    ConfirmacionRecibioAs(jugador._cartasJugador[i]);
+                }
+            }
+               
         }
         //-----------------------Fin RecibioAs()------------------------------//
 
 
         //Metodo para verificar que el valor que ingrese el usuario sea el correcto en el metodo recibioAS()
-        public void ConfirmacionRecibioAs(Boolean confirmacion, Carta carta)
+        public void ConfirmacionRecibioAs(Carta carta)
         {
-            while (confirmacion != true)
+            Boolean confirmacion = false;
+            while (confirmacion==false)
             {
                 string valor = Console.ReadLine();
                 if (valor == "11"){
