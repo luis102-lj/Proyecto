@@ -10,7 +10,7 @@ namespace Proyecto21.Jugabilidad
     {
         //-----------------------Atributos------------------------------//
         private int cantidadDeJugadores { get; set; }
-        private Jugador[] mesa=new Jugador [6];
+        private Jugador[] mesa=new Jugador [7];
         private Models.Naipe naipeDeLaMesa;
         //-----------------------fin Atributos------------------------------//
 
@@ -80,10 +80,9 @@ namespace Proyecto21.Jugabilidad
                 Console.WriteLine("Revisen sus cartas bien y evaluen si quiere mas cartas o quedarse");
                 dealer(mesa);
                 string ganador = EvaluarGanador(mesa);
-                reiniciarJuego();
                 if (ganador == "")
                 {
-                    ganador = "Nadie, porque ambos se pasaron de 21!";
+                    ganador = "No hay ganador porque todos los jugadores se pasaron de 21!";
                 }
               seguir=seguirJugando(ganador);
             }
@@ -95,6 +94,7 @@ namespace Proyecto21.Jugabilidad
         //Metodo para verificar que el valor que ingrese el usuario sea el correcto en el metodo JugarMesa
         public string seguirJugando(string ganador)
         {
+            imprimirResultado();
             Console.WriteLine("El ganador es: " + ganador);
             Console.WriteLine("Mano terminada, quieres seguir Jugando?\nDigite 1 si quiere seguir jugando \nEnter si quiere salir del juego");
             String continuarJugando = Console.ReadLine();
@@ -108,11 +108,16 @@ namespace Proyecto21.Jugabilidad
         }
         //-----------------------Fin seguirJugando()------------------------------//
 
+
+
         //Sirve para imprimir las peronas con sus respectivas cartas de una mesa
-        public void imprimirMesa()
-        { 
-            for(int i = 0; i <= cantidadDeJugadores-1; i++){
+        public void imprimirResultado()
+        {
+            Console.Clear();
+            for (int i = 0; i <= cantidadDeJugadores ; i++)
+            {
                 mesa[i].imprimirMano();
+                Console.WriteLine("Con un total de puntos: {0}", mesa[i].DevolverTotalMano());
             }
         }
         //-----------------------Fin imprimirMesa()------------------------------//
@@ -122,7 +127,7 @@ namespace Proyecto21.Jugabilidad
         {
             naipeDeLaMesa = new Models.Naipe();
             
-            for(int i = 0; i < cantidadDeJugadores; i++){
+            for(int i = 0; i < cantidadDeJugadores+1; i++){
                 mesa[i]._cartasJugador = new Carta[10];
                 mesa[i].contadorDeCartasDePersona = 0;
                 mesa[i].recibeCarta = true;
@@ -186,6 +191,7 @@ namespace Proyecto21.Jugabilidad
                 string nombre = Console.ReadLine();
                 mesa[i] = new Jugador(nombre); 
             }
+            mesa[cantidadDeJugadores]= new Jugador("La Casa");
         }
         //-----------------------Fin CrearMesa()------------------------------//
 
@@ -196,7 +202,7 @@ namespace Proyecto21.Jugabilidad
             Acciones barajar=new Acciones();
             barajar.Barajar(naipeDeLaMesa);
             
-            for(int i=0; i<=cantidadDeJugadores-1; i++)
+            for(int i=0; i<=cantidadDeJugadores; i++)
             {
                 for(int j = 0; j <= 1; j++)
                 {
@@ -232,20 +238,34 @@ namespace Proyecto21.Jugabilidad
             {
                 if(jugadores[i] != null){
                     jugadores[i].imprimirMano();
-                    jugadores[i].Stay();
-                    while (jugadores[i].recibeCarta){
-                        Console.Clear();
-                        jugadores[i].pedirCarta(naipeDeLaMesa);
-                        jugadores[i].imprimirMano();
-                        jugadores[i].Stay();
+                    while(jugadores[i].recibeCarta){
+                        jugadores[i].RecibioAs(jugadores[i]);
+                        ValidacionDeRangoDeJuego(jugadores[i]);
                     }
                 } 
             }
         }
         //-----------------------Fin Dealer()------------------------------//
 
+        public void ValidacionDeRangoDeJuego(Jugador jugador)
+        {
+            if (jugador.DevolverTotalMano() >= 15){
+                jugador.Stay();
+                if (jugador.recibeCarta){
+                    jugador.pedirCarta(naipeDeLaMesa);
+                    jugador.imprimirMano();
+                    
+                }
+            }else{
+                Console.WriteLine("Se le agrego otra carta mas, ya que contaba con una puntuacion menor a 15 puntos.");
+                jugador.pedirCarta(naipeDeLaMesa);
+                jugador.imprimirMano();
+            }
+        }
 
         //-----------------------Fin Metodos------------------------------//
+
+
 
 
     }
